@@ -45,3 +45,7 @@ MultiTapAction(
 | __taps__                    | int                  | Number of taps required to trigger the action.                             |
 | __action__                  | VoidCallback         | Custom action to perform when the specified number of taps is detected.    |
 | __child__                   | Widget               | Widget on which taps are detected.                                         |
+
+## Author
+
+This package was developed by [sawongam](https://github.com/sawongam)
