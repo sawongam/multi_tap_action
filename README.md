@@ -1,12 +1,12 @@
 # Multi Tap Action
-![Pub](https://img.shields.io/badge/Pub-0.0.1-blue.svg)
+![Pub](https://img.shields.io/badge/Pub-0.0.2-blue.svg)
 ![Publisher](https://img.shields.io/badge/Publisher-sawongam-blue.svg)
 
 ## Features
 
 - **Specify the desired number of taps:** Define the exact number of taps required to trigger an action.
-- Perform custom actions: Upon reaching the specified number of taps, execute any desired action.
-- Simple integration: The package integrates seamlessly with your existing widgets using the familiar GestureDetector widget.
+- **Perform custom actions:** Upon reaching the specified number of taps, execute any desired action.
+- **Simple integration:** The package integrates seamlessly with your existing widgets using the familiar GestureDetector widget.
 
 ## Getting started
 
