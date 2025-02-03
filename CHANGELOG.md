@@ -1,4 +1,9 @@
-## 0.1.0
+## 2.0.0
+- Added per-tap callback function for individual tap events
+- Introduced customizable haptic feedback types
+- Restructured codebase for improved maintainability
+
+## 1.0.0
 
 ### New Features
 - Added a reset timer to automatically reset the tap counter
@@ -14,8 +19,8 @@
 
 ## 0.0.2
 
-* Typo Fixes
+- Typo Fixes and Documentation Updates
 
 ## 0.0.1
 
-* Initial Release
+- Initial Release
