@@ -1,7 +1,7 @@
-# 2.1.0
+## 2.1.0
 - Performance improvements and optimizations
 
-# 2.0.0
+## 2.0.0
 - Added per-tap callback function for individual tap events
 - Introduced customizable haptic feedback types
 - Restructured codebase for improved maintainability
