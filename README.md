@@ -1,5 +1,5 @@
 # Multi Tap Action
-![Pub](https://img.shields.io/badge/Pub-2.0.0-blue.svg)
+![Pub](https://img.shields.io/badge/Pub-2.1.0-blue.svg)
 ![Publisher](https://img.shields.io/badge/Publisher-sawongam-blue.svg)
 
 ## Features
@@ -25,6 +25,10 @@ import 'package:multi_tap_action/multi_tap_action.dart';
 
 ## Usage
 
+### Basic Example
+
+Detect a triple tap and perform an action:
+
 ```dart
 MultiTapAction(
   taps: 3, // Number of taps to detect
@@ -35,6 +39,30 @@ MultiTapAction(
     color: Colors.yellow,
     width: 100,
     height: 100,
+  ),
+)
+```
+
+### Advanced Example
+
+Detect a double tap with haptic feedback and a custom reset duration:
+
+```dart
+MultiTapAction(
+  taps: 2,
+  onActionTriggered: (taps) {
+    print('$taps taps detected!');
+  },
+  onTap: (currentTapCount) {
+    print('Current tap count: $currentTapCount');
+  },
+  resetDuration: Duration(seconds: 2), // Reset tap counter after 2 seconds
+  enableHapticFeedback: true, // Enable haptic feedback
+  hapticFeedbackType: HapticFeedbackType.mediumImpact, // Use medium impact haptic feedback
+  child: Container(
+    color: Colors.red,
+    width: 150,
+    height: 150,
   ),
 )
 ```
