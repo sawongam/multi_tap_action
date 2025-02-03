@@ -1,6 +1,6 @@
 name: multi_tap_action
 description: "A Flutter package to detect a specific number of taps on a widget and trigger custom actions. Perfect for implementing multi-tap gestures like double-tap, triple-tap, or more."
-version: 2.1.0
+version: 2.1.1
 repository: "https://github.com/sawongam/multi_tap_action/"
 
 environment:

@@ -1,3 +1,6 @@
+## 2.1.1
+- Documentation updates
+
 ## 2.1.0
 - Performance improvements and optimizations
 

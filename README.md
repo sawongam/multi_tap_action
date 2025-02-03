@@ -1,5 +1,5 @@
 # Multi Tap Action
-![Pub](https://img.shields.io/badge/Pub-2.1.0-blue.svg)
+![Pub](https://img.shields.io/badge/Pub-2.1.1-blue.svg)
 ![Publisher](https://img.shields.io/badge/Publisher-sawongam-blue.svg)
 
 ## Features
