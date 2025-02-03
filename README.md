@@ -56,7 +56,3 @@ MultiTapAction(
 ## Author
 
 This package was developed by [sawongam](https://github.com/sawongam)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

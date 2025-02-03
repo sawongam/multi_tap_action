@@ -1,14 +1,15 @@
 library multi_tap_action;
 
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:multi_tap_action/src/utils/haptic_feedback_utils.dart';
 import 'constants/app_text.dart';
 import 'constants/enums.dart';
 
-/// A widget that detect a specific number of taps on a child widget and triggers an action
+/// A widget that detects a specific number of taps on a child widget and triggers an action.
 class MultiTapAction extends StatefulWidget {
-  /// Number of taps required to execute the action
+  /// Number of taps required to execute the action.
   final int taps;
 
   /// Callback function to execute when tap count is reached.
@@ -19,16 +20,16 @@ class MultiTapAction extends StatefulWidget {
   /// It will return the current tap count.
   final Function(int currentTapCount)? onTap;
 
-  /// Child widget to apply tap detection to
+  /// Child widget to apply tap detection to.
   final Widget child;
 
-  /// Time window to count taps within
+  /// Time window to count taps within.
   final Duration resetDuration;
 
-  /// Enable haptic feedback on action trigger
+  /// Enable haptic feedback on action trigger.
   final bool enableHapticFeedback;
 
-  /// Type of haptic feedback to trigger (defaults to light impact)
+  /// Type of haptic feedback to trigger (defaults to light impact).
   final HapticFeedbackType hapticFeedbackType;
 
   const MultiTapAction({
@@ -47,8 +48,8 @@ class MultiTapAction extends StatefulWidget {
 }
 
 class _MultiTapActionState extends State<MultiTapAction> {
-  int _tapCounter = 0;
-  DateTime? _lastTapTime;
+  final ValueNotifier<int> _tapCounter = ValueNotifier(0);
+  Timer? _resetTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -59,50 +60,39 @@ class _MultiTapActionState extends State<MultiTapAction> {
     );
   }
 
-  void _handleTap() {
-    final now = DateTime.now();
+  @override
+  void dispose() {
+    _tapCounter.dispose();
+    _resetTimer?.cancel();
+    super.dispose();
+  }
 
-    if (_lastTapTime != null &&
-        now.difference(_lastTapTime!) > widget.resetDuration) {
+  void _handleTap() {
+    // Cancel the previous timer if it exists.
+    _resetTimer?.cancel();
+
+    // Increment the tap counter.
+    _tapCounter.value++;
+
+    // Notify the onTap callback if provided.
+    widget.onTap?.call(_tapCounter.value);
+
+    // Check if the tap count matches the required number of taps.
+    if (_tapCounter.value == widget.taps) {
+      widget.onActionTriggered(_tapCounter.value);
+
+      // Trigger haptic feedback if enabled.
+      if (widget.enableHapticFeedback) {
+        HapticFeedbackUtils.triggerHapticFeedback(widget.hapticFeedbackType);
+      }
+
+      // Reset the tap counter.
       _resetTapCounter();
     }
 
-    setState(() {
-      _tapCounter++;
-      _lastTapTime = now;
-    });
-
-    if (_tapCounter == widget.taps) {
-      widget.onActionTriggered(_tapCounter);
-      if (widget.enableHapticFeedback) {
-        _triggerHapticFeedback();
-      }
-      return _resetTapCounter();
-    }
-
-    widget.onTap?.call(_tapCounter);
+    // Start a new timer to reset the tap counter if no further taps occur.
+    _resetTimer = Timer(widget.resetDuration, _resetTapCounter);
   }
 
-  void _resetTapCounter() {
-    setState(() {
-      _tapCounter = 0;
-    });
-  }
-
-  void _triggerHapticFeedback() {
-    switch (widget.hapticFeedbackType) {
-      case HapticFeedbackType.lightImpact:
-        HapticFeedback.lightImpact();
-        break;
-      case HapticFeedbackType.mediumImpact:
-        HapticFeedback.mediumImpact();
-        break;
-      case HapticFeedbackType.heavyImpact:
-        HapticFeedback.heavyImpact();
-        break;
-      case HapticFeedbackType.selectionClick:
-        HapticFeedback.selectionClick();
-        break;
-    }
-  }
+  void _resetTapCounter() => _tapCounter.value = 0;
 }
