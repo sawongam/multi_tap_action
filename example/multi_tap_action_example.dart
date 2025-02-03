@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_tap_action/multi_tap_action.dart';
+import 'package:multi_tap_action/src/constants/enums.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,25 +19,20 @@ class MyApp extends StatelessWidget {
         ),
         body: Center(
           child: MultiTapAction(
-            taps: 3, // Number of taps to trigger the action
-            action: () {
-              // Custom action to perform when the specified number of taps is detected
-              print('Triple tap detected!');
+            taps: 3, // Number of taps required to trigger the action
+            resetDuration: const Duration(seconds: 5),
+            onActionTriggered: (int taps) {
+              // Action triggered when the required number of taps is detected
+              print('$taps taps detected!');
             },
-            child: Container(
-              width: 200,
-              height: 200,
-              color: Colors.blue,
-              child: const Center(
-                child: Text(
-                  'Tap Me!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
+            onTap: (int count) {
+              // Action triggered on each tap
+              print('Current tap count: $count');
+            },
+            enableHapticFeedback: true, // Enable haptic feedback
+            hapticFeedbackType:
+                HapticFeedbackType.mediumImpact, // Haptic feedback type
+            child: const Text('Tap 5 times!'),
           ),
         ),
       ),

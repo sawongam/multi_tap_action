@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'constants/app_text.dart';
 import 'constants/enums.dart';
 
+/// A widget that detect a specific number of taps on a child widget and triggers an action
 class MultiTapAction extends StatefulWidget {
   /// Number of taps required to execute the action
   final int taps;
@@ -36,7 +37,7 @@ class MultiTapAction extends StatefulWidget {
     required this.onActionTriggered,
     required this.child,
     this.onTap,
-    this.resetDuration = const Duration(seconds: 2),
+    this.resetDuration = const Duration(seconds: 60),
     this.enableHapticFeedback = false,
     this.hapticFeedbackType = HapticFeedbackType.lightImpact,
   }) : assert(taps > 0, AppText.tapValidationText);
